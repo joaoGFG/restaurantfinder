@@ -1,0 +1,6 @@
+rootProject.name = 'restaurant-finder'
+
+include 'eureka-server'
+include 'restaurant-service'
+include 'user-service'
+include 'recommendation-service'
