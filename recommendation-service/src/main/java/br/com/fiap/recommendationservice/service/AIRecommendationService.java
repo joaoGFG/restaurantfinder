@@ -4,7 +4,6 @@ import br.com.fiap.recommendationservice.client.ServiceClient;
 import br.com.fiap.recommendationservice.dto.RecommendationDTO;
 import br.com.fiap.recommendationservice.dto.RestaurantDTO;
 import br.com.fiap.recommendationservice.dto.UserPreferencesDTO;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
@@ -12,12 +11,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class AIRecommendationService {
     
     private final ServiceClient serviceClient;
     private final ChatClient chatClient;
+    
+    public AIRecommendationService(ServiceClient serviceClient, ChatClient.Builder chatClientBuilder) {
+        this.serviceClient = serviceClient;
+        this.chatClient = chatClientBuilder.build();
+    }
     
     public RecommendationDTO getAIRecommendations(Long userId) {
         log.info("Getting AI recommendations for user: {}", userId);
