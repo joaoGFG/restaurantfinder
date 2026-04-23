@@ -23,19 +23,15 @@ public class AIRecommendationService {
         log.info("Getting AI recommendations for user: {}", userId);
         
         try {
-            // Fetch user preferences
             UserPreferencesDTO userPreferences = serviceClient.getUserPreferences(userId);
             log.info("User preferences fetched: {}", userPreferences);
             
-            // Fetch all restaurants
             List<RestaurantDTO> allRestaurants = serviceClient.getAllRestaurants();
             log.info("Total restaurants available: {}", allRestaurants.size());
             
-            // Filter restaurants based on user preferences
             List<RestaurantDTO> filteredRestaurants = filterRestaurants(allRestaurants, userPreferences);
             log.info("Filtered restaurants count: {}", filteredRestaurants.size());
             
-            // Get AI reasoning
             String aiReasoning = getAIReasoning(userPreferences, filteredRestaurants);
             
             return RecommendationDTO.builder()
